@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<?xml encoding="ascii">
+<html lang="en" prefix="op: http://media.facebook.com/op#">
+  <head>
+    <meta charset="utf-8">
+    <meta content="VEJA.com" property="fb:article_style">
+    <link href="#{materia.to_url}" rel="canonical">
+    <meta content="v1.0" property="op:markup_version">
+    <meta property="og:description" content="#{materia.descricao_conteudo || materia.subtitulo}">
+  </head>
+  <body>
+    <article>
+      <header>
+        - if materia.capa
+          <figure>
+            <img src="#{materia.capa.transformacao('corpo_materia_ubber_veja')}" />
+            <figcaption>
+              = "#{sanitize(materia.capa.descricao)} | Crédito: #{sanitize(materia.capa.credito)}"
+            </figcaption>
+          </figure>
+        <h1>#{materia.titulo}</h1>
+        - if materia.subtitulo
+          <h2>#{materia.subtitulo}</h2>
+        <time class="op-published" datetime="#{materia.disponibilizacao['data']}">#{materia.data_disponibilizacao}</time>
+        <time class="op-modified" datetime="#{materia.ultima_atualizacao['data']}">#{materia.data_ultima_atualizacao}</time>
+        <address>
+          <a href="http://facebook.com/veja" rel="facebook">
+            = materia.autor.empty? ? "VEJA.com" : materia.autor
+          </a>
+        </address>
+        <details>
+          <summary>Kicker</summary>
+          = materia.editoria_padrao
+        </details>
+      </header>
+      = veja_corpo_with_ad(materia.corpo([veja_leia_tambem_transformer]))
+      <figure class="op-tracker">
+        <iframe hidden>
+          javascript:
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-67167233-1', 'auto');
+            ga('send', 'pageview');
+        </iframe>
+      </figure>
+      <footer>VEJA.com</footer>
+    </article>
+  </body>
+</html>
